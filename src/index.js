@@ -17,7 +17,7 @@ app.listen( async () =>{
 
     const tweetRepo = new TweetRepository();
 
-    const tweet = await tweetRepo.getWithComments('658471aa29da623ee760b180');
+    const tweet = await tweetRepo.getAll(2 , 3);
     //Call:
     // const tweet = await tweetRepo.create({
     //     content : 'Latest Content Now',
@@ -33,7 +33,7 @@ app.listen( async () =>{
 
     // console.log(tweet);
 
-    console.log(tweet);
+    console.log(tweet[0].contentWithEmail);
 
     console.log('Database got Connected');
 });
