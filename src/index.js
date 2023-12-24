@@ -17,10 +17,10 @@ app.listen( async () =>{
 
     const tweetRepo = new TweetRepository();
 
-    const tweet = await tweetRepo.create({
-        content : 'Bappa Rawal',
-        userEmail : 'bappa@gmail.com'
-    });
+    // const tweet = await tweetRepo.create({
+    //     content : 'Bappa Rawal',
+    //     userEmail : 'bappa@gmail.com'
+    // });
 
     // const tweet = await tweetRepo.getAll(2 , 3);
     //Call:
@@ -40,7 +40,7 @@ app.listen( async () =>{
 
     // console.log(tweet[0].contentWithEmail);
 
-    console.log(tweet);
+    // console.log(tweet);
 
     console.log('Database got Connected');
 });
