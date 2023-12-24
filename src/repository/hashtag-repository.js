@@ -21,6 +21,15 @@ class HashtagRepository{
             console.log(error);
         }
     }
+    async findOne(data){
+        try {
+            const hashtag = await Hashtag.findOne({title : data.title});
+            //Return:
+            return hashtag;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 module.exports = HashtagRepository;
