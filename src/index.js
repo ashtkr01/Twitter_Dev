@@ -26,7 +26,7 @@ app.listen( async () =>{
 
     const tweetService = new TweetService();
     //Create:
-    const tweet = await tweetService.create({content: 'Iam a bhakt of #rana and #sangha'});
+    const tweet = await tweetService.create({content: 'Iam a bhakt of #rawal and #kumbha'});
     console.log(tweet);
     // const hashtag = await hashtagRepo.find({title : 'Support Bharat'});
     // console.log(hashtag);

@@ -22,8 +22,7 @@ class TweetService{
         const hashtagId = [];
         for(const item of tags){
             const hashtag = await this.hashtagRepository.findOne({title : item});
-            console.log("Print");
-            console.log(hashtag);
+            
             // //Find:
             if(hashtag){
                 tweet.hashtags.push(hashtag.id);
@@ -39,19 +38,6 @@ class TweetService{
                 await hashtag.save();
             }
         }    
-        // const content = data.content;
-        // const tagss = content.match(/#[a-zA-Z0-9_]+/g); //This regex extracts hashtags
-        // tags = tagss.map((tag) => {
-        //     tag.substring(1);
-        // });
-        // console.log(tags);
-        // const tweet = await this.tweetRepository.create(data);
-        /*
-        To do create hashtags and add here
-        1: bulkcreate in mongoose
-        2: filter title of hashtags based on multiple tags
-        3: How to add tweets id inside all the hashtags:
-        */
        return tweet;
     }
 }

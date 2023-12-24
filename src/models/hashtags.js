@@ -13,7 +13,7 @@ const hashtagSchema = new mongoose.Schema({
     ]
 }, {timestamps : true});
 
-// animalSchema.index({ name: 1, type: -1 }); // schema level
+//To make Unique:
 hashtagSchema.index({title: 1} , {unique: true});
 
 
