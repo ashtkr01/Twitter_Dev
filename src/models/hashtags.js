@@ -13,5 +13,9 @@ const hashtagSchema = new mongoose.Schema({
     ]
 }, {timestamps : true});
 
+// animalSchema.index({ name: 1, type: -1 }); // schema level
+hashtagSchema.index({title: 1} , {unique: true});
+
+
 const Hashtag = mongoose.model('Hashtag',hashtagSchema);
 module.exports = Hashtag;

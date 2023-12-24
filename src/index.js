@@ -3,8 +3,11 @@ const express = require('express');
 const app = express();
 
 const TweetRepository = require('./repository/tweet-repository')
+const HashtagRepository = require('./repository/hashtag-repository');
 
 const Comment = require('./models/comment');
+
+const Hashtag = require('./models/hashtags');
 
 const connect = require('./config/database');
 
@@ -16,6 +19,14 @@ app.listen( async () =>{
     await connect();
 
     const tweetRepo = new TweetRepository();
+
+    const hashtagRepo = new HashtagRepository();
+
+    const hashtag = await hashtagRepo.find({title : 'Support Bharat'});
+    console.log(hashtag);
+
+    // const hashtag = await Hashtag.create({ title: 'I always Support Bharat till my last breathe'});
+    // console.log(hashtag);
 
     // const tweet = await tweetRepo.create({
     //     content : 'Bappa Rawal',
