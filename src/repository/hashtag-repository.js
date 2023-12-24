@@ -1,31 +1,50 @@
 const Hashtag = require('../models/hashtags');
+const Tweet = require('../models/tweet');
 
-//Class:
 class HashtagRepository{
-    async create(data){
+
+    async create(data) {
         try {
-            const hashtag = await Hashtag.create(data);
-            //Return:
-            return hashtag;
+            const tag = await Hashtag.create(data);
+            return tag;
         } catch (error) {
             console.log(error);
         }
     }
-    //Find:
-    async find(data){
+
+    async bulkCreate(data){
         try {
-            const hashtag = await Hashtag.find({title : data.title});
-            //Return:
-            return hashtag;
+            const tags = await Hashtag.insertMany(data);
+            return tags;
         } catch (error) {
             console.log(error);
         }
     }
-    async findOne(data){
+
+    async get(id){
         try {
-            const hashtag = await Hashtag.findOne({title : data.title});
-            //Return:
-            return hashtag;
+            const tag = await Hashtag.findById(id);
+            return tag;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    async destroy(id){
+        try {
+            const response = await Hashtag.findByIdAndRemove(tweetId);
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async findByName(tagList){
+        try {
+            const response = await Hashtag.find({
+                title: tagList
+            });
+            return response;
         } catch (error) {
             console.log(error);
         }

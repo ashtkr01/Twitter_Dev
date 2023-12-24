@@ -8,37 +8,31 @@ class TweetService{
     }
     //Create:
     async create(data){
-
-        //Find out all the hashtag :
         const content = data.content;
-        //Insert tweet:
+        const tags = content.match(/#[a-zA-Z0-9_]+/g).map((tag) => tag.substring(1));
         const tweet = await this.tweetRepository.create(data);
-        const tagss = content.match(/#[a-zA-Z0-9_]+/g); //This regex extracts hashtags:
-        const tags = tagss.map((tag) =>{
-            return tag.substring(1);
+        let alreadyPresentTags = await this.hashtagRepository.findByName(tags);
+        let titleOfPresenttags = alreadyPresentTags.map(tags => tags.title);
+        let newTags = tags.filter(tag => !titleOfPresenttags.includes(tag));
+        newTags = newTags.map(tag => {
+            return {title: tag, tweets: [tweet.id]};
         });
-        // console.log(tags);
-        //Map :
-        const hashtagId = [];
-        for(const item of tags){
-            const hashtag = await this.hashtagRepository.findOne({title : item});
-            
-            // //Find:
-            if(hashtag){
-                tweet.hashtags.push(hashtag.id);
-                await tweet.save();
-                hashtag.tweets.push(tweet.id);
-                await hashtag.save();
-            }
-            else{
-                const hashtag = await this.hashtagRepository.create({title : item});
-                tweet.hashtags.push(hashtag.id);
-                await tweet.save();
-                hashtag.tweets.push(tweet.id);
-                await hashtag.save();
-            }
-        }    
-       return tweet;
+        const response = await this.hashtagRepository.bulkCreate(newTags);
+        //Add the hashtagId in Tweet:
+        for(const tag of response){
+            tweet.hashtags.push(tag.id);
+            await tweet.save();
+        }
+        //Why we don't use await before save : Beacause this thing can go parallely and we don't need to wait for it:
+        alreadyPresentTags.forEach((tag) =>{
+            tag.tweets.push(tweet.id);
+            tag.save();
+        });
+        for(const tag of alreadyPresentTags){
+            tweet.hashtags.push(tag.id);
+            await tweet.save();
+        }
+        return tweet;
     }
 }
 
