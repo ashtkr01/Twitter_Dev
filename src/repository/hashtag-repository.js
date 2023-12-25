@@ -1,5 +1,4 @@
-const Hashtag = require('../models/hashtags');
-const Tweet = require('../models/tweet');
+import Hashtag from '../models/hashtags.js';
 
 class HashtagRepository{
 
@@ -51,4 +50,4 @@ class HashtagRepository{
     }
 }
 
-module.exports = HashtagRepository;
+export default HashtagRepository;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const tweetSchema = new mongoose.Schema({
     // content always be there
@@ -17,4 +17,4 @@ const tweetSchema = new mongoose.Schema({
 
 //Automatic Mongo will make collection to be pluralise i.e Tweet --> Tweets:
 const Tweet = mongoose.model('Tweet' , tweetSchema);
-module.exports = Tweet;
+export default Tweet;
