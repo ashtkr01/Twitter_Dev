@@ -12,6 +12,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
+import { UserRepository , TweetRepository } from '../src/repository/index.js';
+import LikeService from './services/like-service.js';
+import TweetService from './services/tweet-service.js'
+
 app.use('/api', apiRoutes);
 
 
@@ -21,5 +25,17 @@ app.listen(PORT, async () =>{
 
     await connect();
 
+    const userRepository = new UserRepository();
+    const tweetRepository = new TweetRepository();
+
+    const likeService = new LikeService();
+    const tweetService = new TweetService();
+    //Create:
+    const users = await userRepository.getAll();
+    // //gGet:
+    const tweets = await tweetRepository.getAll(0 , 2); 
+    // //Create Like:
+    const like = await likeService.toggleLike(tweets[0].id , 'Tweet' , users[0].id);
+    console.log(like);
     console.log('Database got Connected');
 });
