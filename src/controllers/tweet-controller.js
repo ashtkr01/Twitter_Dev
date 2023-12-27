@@ -12,9 +12,10 @@ export const createTweet = async (req , res) => {
             error: {}
         });
     } catch (error) {
+        console.log("Hello");
         return res.status(500).json({
             success: false,
-            message: "Something went wrong",
+            message: "Something went wrong in side",
             data: {},
             error: error
         });

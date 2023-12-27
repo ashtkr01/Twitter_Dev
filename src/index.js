@@ -25,17 +25,20 @@ app.listen(PORT, async () =>{
 
     await connect();
 
-    const userRepository = new UserRepository();
-    const tweetRepository = new TweetRepository();
+    // const userRepository = new UserRepository();
+    // const tweetRepository = new TweetRepository();
 
-    const likeService = new LikeService();
+    // const likeService = new LikeService();
     const tweetService = new TweetService();
-    //Create:
-    const users = await userRepository.getAll();
-    // //gGet:
-    const tweets = await tweetRepository.getAll(0 , 2); 
-    // //Create Like:
-    const like = await likeService.toggleLike(tweets[0].id , 'Tweet' , users[0].id);
-    console.log(like);
+    const tweet = await tweetService.create({
+        content: "This is first tweet ranas"
+    });
+    // //Create:
+    // const users = await userRepository.getAll();
+    // // //gGet:
+    // const tweets = await tweetRepository.getAll(0 , 2); 
+    // // //Create Like:
+    // const like = await likeService.toggleLike(tweets[0].id , 'Tweet' , users[0].id);
+    // console.log(like);
     console.log('Database got Connected');
 });

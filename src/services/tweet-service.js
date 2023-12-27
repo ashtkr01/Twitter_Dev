@@ -8,9 +8,13 @@ class TweetService{
     //Create:
     async create(data){
         const content = data.content;
-        const tags = content.match(/#[a-zA-Z0-9_]+/g)
-                                                    .map((tag) => tag.substring(1).toLowerCase());
+        //Create:
         const tweet = await this.tweetRepository.create(data);
+        const tagSep = content.match(/#[a-zA-Z0-9_]+/g);
+        if(!tagSep){
+            return tweet;
+        }
+        const tags = tagSep.map((tag) => tag.substring(1).toLowerCase());
         let alreadyPresentTags = await this.hashtagRepository.findByName(tags);
         let titleOfPresenttags = alreadyPresentTags.map(tags => tags.title);
         let newTags = tags.filter(tag => !titleOfPresenttags.includes(tag));
