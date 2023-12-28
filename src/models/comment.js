@@ -6,9 +6,15 @@ const commentSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    //userEmail may be or may not be present there:
-    userEmail : {
-        type : String
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+    onModel: {
+        type: String,
+        required: true,
+        enum: ['Tweet' , 'Comment']
     }
 } , {timestamps : true});
 
