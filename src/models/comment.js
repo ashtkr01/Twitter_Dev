@@ -15,7 +15,12 @@ const commentSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['Tweet' , 'Comment']
-    }
+    },
+    commentable : {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        refPath: 'onModel'
+    },
 } , {timestamps : true});
 
 
