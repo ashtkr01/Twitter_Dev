@@ -16,15 +16,20 @@ class TweetRepository extends CrudRepository{
         }
     }
 
-    // async getWithComments(id){
-    //     try {
-    //         /*lean() is a method that you can chain to a Mongoose query to improve query performance by returning plain JavaScript objects instead of Mongoose documents.*/
-    //         const tweet = await Tweet.findById(id).populate({path : 'comments'}).lean();
-    //         return tweet;
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    async getWithComments(id){
+        try {
+            /*lean() is a method that you can chain to a Mongoose query to improve query performance by returning plain JavaScript objects instead of Mongoose documents.*/
+            const tweet = await Tweet.findById(id).populate({
+                path : 'comments',
+                    populate: {
+                        path: 'comments'
+                }
+            }).lean();
+            return tweet;
+        } catch (error) {
+            console.log(error);
+        }
+    }
     //Sonething think in the direction of Pagination :
     async getAll(offset , limit){
         try {

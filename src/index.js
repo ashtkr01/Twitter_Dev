@@ -25,16 +25,20 @@ app.listen(PORT, async () =>{
 
     await connect();
 
-    // const userRepository = new UserRepository();
+    const userRepository = new UserRepository();
     // const tweetRepository = new TweetRepository();
 
     // const likeService = new LikeService();
-    const tweetService = new TweetService();
-    const tweet = await tweetService.create({
-        content: "This is first tweet ranas"
-    });
+    // const tweetService = new TweetService();
+    // const tweet = await tweetService.create({
+    //     content: "This is first tweet ranas"
+    // });
     // //Create:
-    // const users = await userRepository.getAll();
+    // const users = await userRepository.create({
+    //     email: 'ashstkr@gmail.com',
+    //     password: '98976630@At',
+    //     name: 'Ashish Kumar'
+    // });
     // // //gGet:
     // const tweets = await tweetRepository.getAll(0 , 2); 
     // // //Create Like:
