@@ -1,7 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import passport from 'passport';
 
 import { connect } from './config/database.js';
+import {passportAuth } from './config/jwt-middleware.js';
 
 const PORT = 3000;
 
@@ -12,9 +14,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
-import { UserRepository , TweetRepository } from '../src/repository/index.js';
-import LikeService from './services/like-service.js';
-import TweetService from './services/tweet-service.js'
+app.use(passport.initialize());
+passportAuth(passport);
 
 app.use('/api', apiRoutes);
 
@@ -25,24 +26,5 @@ app.listen(PORT, async () =>{
 
     await connect();
 
-    const userRepository = new UserRepository();
-    // const tweetRepository = new TweetRepository();
-
-    // const likeService = new LikeService();
-    // const tweetService = new TweetService();
-    // const tweet = await tweetService.create({
-    //     content: "This is first tweet ranas"
-    // });
-    // //Create:
-    // const users = await userRepository.create({
-    //     email: 'ashstkr@gmail.com',
-    //     password: '98976630@At',
-    //     name: 'Ashish Kumar'
-    // });
-    // // //gGet:
-    // const tweets = await tweetRepository.getAll(0 , 2); 
-    // // //Create Like:
-    // const like = await likeService.toggleLike(tweets[0].id , 'Tweet' , users[0].id);
-    // console.log(like);
     console.log('Database got Connected');
 });
