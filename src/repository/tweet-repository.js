@@ -13,6 +13,7 @@ class TweetRepository extends CrudRepository{
             return tweet;
         } catch (error) {
             console.log(error);
+            throw error;
         }
     }
 
@@ -34,6 +35,7 @@ class TweetRepository extends CrudRepository{
     async getAll(offset , limit){
         try {
             const tweet = await Tweet.find().skip(offset).limit(limit);
+            console.log(tweet);
             return tweet;
         } catch (error) {
             console.log(error);
